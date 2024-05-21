@@ -1,5 +1,43 @@
 import logging
 import time
+from abc import ABC, abstractmethod
+
+class IServicioCorreo(ABC):
+
+  @abstractmethod
+  def enviar_correo(self, destinatario, asunto, mensaje):
+    """
+    Envía un correo electrónico a un destinatario especificado con un asunto y un mensaje.
+
+    Args:
+      destinatario: La dirección de correo electrónico del destinatario.
+      asunto: El asunto del correo electrónico.
+      mensaje: El cuerpo del correo electrónico.
+    """
+    pass
+
+  @abstractmethod
+  def listar_correos(self):
+    """
+    Obtiene una lista de los correos electrónicos que se encuentran en el buzón del usuario.
+
+    Returns:
+      Una lista de objetos CorreoElectronico.
+    """
+    pass
+
+  @abstractmethod
+  def descargar_correo(self, identificador_correo):
+    """
+    Descarga un correo electrónico específico del buzón del usuario.
+
+    Args:
+      identificador_correo: El identificador del correo electrónico que se desea descargar.
+
+    Returns:
+      El contenido del correo electrónico descargado.
+    """
+    pass
 
 class ConfiguracionCorreo:
   def __init__(self, servidor_smtp, puerto_smtp, usuario_smtp, contrasena_smtp, reintentar_envio=3, seguro_hilos=True, registrar_eventos=False, usar_cache=False):
